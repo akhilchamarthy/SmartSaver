@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "SmartSaver",
+    "version": "0.0.1",
+    "description": "Add offers to your credit card with the click of a button",
+    "permissions": [
+      "scripting",
+      "tabs",
+      "notifications"],
+    "host_permissions": ["*://*/*"],
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "icons": {
+      "16": "saver.png"
+    }
+  }
+  
