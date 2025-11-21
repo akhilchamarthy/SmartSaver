@@ -1,4 +1,9 @@
-var buttons = document.querySelectorAll('button[title="Add to Card"]'); 
+if (document.querySelectorAll('button[title="add to list card"]') != null) {
+    var buttons = document.querySelectorAll('button[title="add to list card"]'); 
+}
+else {
+    var buttons = document.querySelectorAll('button[title="add to card"]'); 
+}
 // Loop through each button 
 if (buttons != null)
     {

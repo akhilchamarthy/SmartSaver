@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 
 <html>
 
 <head>
-  <title>SmartSaver</title>
+  <title>SmartSaver2.0</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 
@@ -29,4 +29,144 @@
   <script src="popup.js"></script>
 </body>
 
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SmartSaver</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="popup-header">
+    <div class="popup-header-main">
+      <h1 class="popup-title">SmartSaver</h1>
+      <span class="popup-subtitle">Manage offers & cards in one place</span>
+    </div>
+  </header>
+
+  <!-- Tab Navigation -->
+  <nav class="tab-nav">
+    <button id="offers-tab" class="tab-button active">Offers</button>
+    <button id="wallet-tab" class="tab-button">Wallet</button>
+  </nav>
+
+  <div class="popup-content">
+    <!-- OFFERS TAB -->
+    <div id="offers-content" class="tab-content active">
+      <section class="section">
+        <h2 class="section-title">Auto-add offers</h2>
+        <button id="amex-button" class="button-43 action_btn" role="button">
+          Add AMEX offers
+        </button>
+        <button id="chase-button" class="button-43 action_btn" role="button">
+          Add Chase offers
+        </button>
+
+        <h3 class="section-subtitle">How it works</h3>
+        <ol class="instructions">
+          <li>Sign into your Amex or Chase account</li>
+          <li>Click on the credit/debit card you would like to target</li>
+          <li>Go to the page with all offers for that card</li>
+          <li>Click one of the buttons above</li>
+          <li>All available offers will be added automatically</li>
+        </ol>
+      </section>
+    </div>
+
+    <!-- WALLET TAB -->
+    <div id="wallet-content" class="tab-content">
+      <!-- MAIN WALLET VIEW -->
+      <div id="wallet-main-view">
+        <section class="section wallet-section">
+          <h2 class="section-title">Your Wallet</h2>
+
+          <!-- Add card form -->
+          <div class="wallet-form">
+            <!-- Bank dropdown -->
+            <select id="card-bank-select">
+              <option value="">Select bank</option>
+              <option value="amex">American Express</option>
+              <option value="chase">Chase</option>
+              <option value="citi">Citi</option>
+              <option value="boa">Bank of America</option>
+              <option value="discover">Discover</option>
+              <option value="other">Other</option>
+            </select>
+
+            <!-- Card name dropdown (depends on bank) -->
+            <select id="card-name-select" disabled>
+              <option value="">Select a bank first</option>
+            </select>
+
+            <!-- Keep last4 and type as before -->
+            <input id="card-last4-input" type="text" maxlength="4" placeholder="Last 4" />
+            <select id="card-type-input">
+              <option value="credit">Credit</option>
+              <option value="debit">Debit</option>
+            </select>
+
+            <button id="add-card-button" class="button-small">Add card</button>
+          </div>
+
+          <div class="wallet-layout">
+            <!-- Stacked card names -->
+            <div id="card-stack" class="card-stack">
+              <!-- Cards injected by wallet.js -->
+            </div>
+
+            <!-- Hover preview -->
+            <div id="card-preview" class="card-preview card-preview-empty">
+              <div class="card-preview-placeholder">
+                Hover over a card to preview it
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- CARD DETAILS VIEW (shown when a card is clicked) -->
+      <div id="wallet-details-view" class="wallet-details hidden">
+        <section class="section">
+          <div class="details-header-row">
+            <div>
+              <h2 id="card-title" class="details-card-title">Card Details</h2>
+              <div id="card-subtitle" class="details-card-subtitle"></div>
+            </div>
+            <button id="back-to-wallet" class="button-small button-back">Back to wallet</button>
+          </div>
+
+          <h3 class="section-title">Benefits</h3>
+          <p class="section-subtitle">Track your credit usage this period.</p>
+          <div id="benefits-list" class="benefits-list"></div>
+
+          <div class="benefit-form">
+            <div class="section-title">Add / update benefit</div>
+            <div class="benefit-form-row">
+              <input id="benefit-name-input" type="text" placeholder="Benefit name (e.g. Resy dining, Saks credit)" />
+            </div>
+            <div class="benefit-form-row">
+              <select id="benefit-period-input">
+                <option value="quarter">Quarterly</option>
+                <option value="monthly">Monthly</option>
+                <option value="semiannual">Every 6 months</option>
+                <option value="annual">Annual</option>
+                <option value="other">Other</option>
+              </select>
+              <input id="benefit-limit-input" type="number" min="0" step="1" placeholder="Total $ per period" />
+              <input id="benefit-used-input" type="number" min="0" step="1" placeholder="Used so far $" />
+            </div>
+            <button id="add-benefit-button" class="button-small">Save benefit</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+  <script src="wallet.js"></script>
+</body>
 </html>

@@ -1,0 +1,91 @@
+{
+  "amex": {
+    "Platinum Card": [
+      {
+        "name": "Resy dining credit",
+        "period": "quarter",
+        "limit": 100,
+        "used": 0
+      },
+      {
+        "name": "Saks Fifth Avenue credit",
+        "period": "semiannual",
+        "limit": 50,
+        "used": 0
+      },
+      {
+        "name": "Uber credit",
+        "period": "monthly",
+        "limit": 50,
+        "used": 0
+      },
+      {
+        "name": "Airline fee credit",
+        "period": "annual",
+        "limit": 200,
+        "used": 0
+      }
+    ],
+    "Gold Card": [
+      {
+        "name": "Uber Eats credit",
+        "period": "monthly",
+        "limit": 30,
+        "used": 0
+      },
+      {
+        "name": "Grubhub+ credit",
+        "period": "quarter",
+        "limit": 30,
+        "used": 0
+      }
+    ],
+    "Blue Cash Preferred": [],
+    "Blue Cash Everyday": [],
+    "Everyday Card": []
+  },
+  "chase": {
+    "Sapphire Reserve": [
+      {
+        "name": "DoorDash credit",
+        "period": "quarter",
+        "limit": 60,
+        "used": 0
+      },
+      {
+        "name": "Lyft credit",
+        "period": "quarter",
+        "limit": 60,
+        "used": 0
+      }
+    ],
+    "Sapphire Preferred": [
+      {
+        "name": "DoorDash credit",
+        "period": "quarter",
+        "limit": 25,
+        "used": 0
+      }
+    ],
+    "Chase Freedom Flex": [],
+    "Chase Freedom Unlimited": [],
+    "Chase Ink Business Cash": []
+  },
+  "citi": {
+    "Citi Custom Cash": [],
+    "Citi Double Cash": [],
+    "Citi Premier": []
+  },
+  "boa": {
+    "Bank of America Customized Cash": [],
+    "Bank of America Travel Rewards": []
+  },
+  "discover": {
+    "Discover it Cash Back": [],
+    "Discover it Miles": []
+  },
+  "other": {
+    "Generic Credit Card": [],
+    "Generic Debit Card": []
+  }
+}

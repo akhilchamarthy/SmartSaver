@@ -42,3 +42,402 @@ body { font-family: sans-serif; }
   width: 200px;
   margin: 100 auto;
   display: inline;}
+
+/* Layout */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f7fafc;
+  color: #1a202c;
+  width: 360px;
+}
+
+.popup-header {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  padding: 10px 14px;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.3);
+}
+
+.popup-header-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.popup-subtitle {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.popup-content {
+  padding: 10px 12px 12px;
+  box-sizing: border-box;
+}
+
+.section {
+  margin-bottom: 12px;
+  background: white;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.section-title {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.section-subtitle {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #4b5563;
+}
+
+.instructions {
+  margin: 4px 0 0 16px;
+  padding-left: 0;
+  font-size: 11px;
+  color: #4b5563;
+}
+
+/* Buttons */
+.action_btn {
+  margin-bottom: 6px;
+}
+
+.button-small {
+  background: #2563eb;
+  border: none;
+  border-radius: 999px;
+  color: white;
+  padding: 4px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.button-small:hover {
+  background: #1d4ed8;
+}
+
+.button-danger {
+  background: #dc2626;
+}
+
+.button-danger:hover {
+  background: #b91c1c;
+}
+
+.button-back {
+  background: transparent;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  border-radius: 999px;
+}
+
+/* Wallet */
+.wallet-section {
+  margin-top: 6px;
+}
+
+.wallet-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  grid-gap: 4px;
+  margin-bottom: 8px;
+}
+
+.wallet-form input,
+.wallet-form select {
+  font-size: 11px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  box-sizing: border-box;
+}
+
+#wallet-main-view,
+#wallet-details-view {
+  font-size: 12px;
+}
+
+.wallet-layout {
+  display: flex;
+  gap: 8px;
+}
+
+/* Stacked cards */
+.card-stack {
+  flex: 0 0 120px;
+  max-height: 160px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.card-item {
+  background: #111827;
+  color: white;
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.4);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+}
+
+.card-item:hover {
+  transform: translateX(2px);
+  background: #1f2937;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.5);
+}
+
+/* Hover preview */
+.card-preview {
+  flex: 1;
+  min-height: 100px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #0f172a, #1f2937);
+  color: white;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.45);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.card-preview-empty {
+  background: #f3f4f6;
+  color: #6b7280;
+  box-shadow: none;
+}
+
+.card-preview-placeholder {
+  font-size: 11px;
+  text-align: center;
+  margin: auto;
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.card-main-name {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.card-bank {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.card-last4 {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+/* Details view */
+.wallet-details.hidden {
+  display: none;
+}
+
+.wallet-details {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 8px;
+}
+
+.card-visual {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  padding: 8px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #0f172a, #111827);
+  color: #f9fafb;
+  font-size: 12px;
+}
+
+.details-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.details-label {
+  font-weight: 600;
+  color: #374151;
+}
+
+#details-notes {
+  width: 100%;
+  min-height: 40px;
+  font-size: 11px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.details-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+
+/* Tab Navigation */
+.tab-nav {
+  display: flex;
+  background: #f3f4f6;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tab-button.active {
+  background: white;
+  color: #2563eb;
+  border-bottom: 2px solid #2563eb;
+}
+
+.tab-button:hover:not(.active) {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Card Details in Popup */
+.details-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.details-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  color: #111827;
+}
+
+.details-card-subtitle {
+  font-size: 11px;
+  color: #4b5563;
+  margin-top: 2px;
+}
+
+.benefits-list {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.benefit-item {
+  background: #f9fafb;
+  border-radius: 6px;
+  padding: 6px 8px;
+  border: 1px solid #e5e7eb;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.benefit-name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: #111827;
+}
+
+.benefit-meta {
+  font-size: 10px;
+  color: #6b7280;
+}
+
+.benefit-progress {
+  margin-top: 2px;
+  font-size: 10px;
+  color: #374151;
+}
+
+.benefit-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  gap: 4px;
+}
+
+.benefit-actions input[type="number"] {
+  width: 60px;
+  font-size: 10px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  border: 1px solid #d1d5db;
+}
+
+.benefit-form {
+  margin-top: 8px;
+  padding: 6px 8px;
+  background: #f9fafb;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.benefit-form-row {
+  display: flex;
+  gap: 4px;
+}
+
+.benefit-form input,
+.benefit-form select {
+  flex: 1;
+  font-size: 10px;
+  padding: 3px 5px;
+  border-radius: 3px;
+  border: 1px solid #d1d5db;
+  box-sizing: border-box;
+}

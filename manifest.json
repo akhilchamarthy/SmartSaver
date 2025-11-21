@@ -6,6 +6,7 @@
     "permissions": [
       "scripting",
       "tabs",
+      "storage",
       "notifications"],
     "host_permissions": ["*://*/*"],
     "action": {
@@ -13,6 +14,11 @@
     },
     "icons": {
       "16": "saver.png"
+    },
+  "web_accessible_resources": [
+    {
+      "resources": ["default_benefits.json"],
+      "matches": ["<all_urls>"]
     }
-  }
-  
+  ]  
+}
