@@ -1,91 +1,300 @@
 {
   "amex": {
-    "Platinum Card": [
-      {
-        "name": "Resy dining credit",
-        "period": "quarter",
-        "limit": 100,
-        "used": 0
+    "Platinum Card": {
+      "annualFee": 695,
+      "cashback": {
+        "travel": 5,
+        "dining": 1,
+        "shopping": 1,
+        "gas": 1,
+        "groceries": 1,
+        "other": 1
       },
-      {
-        "name": "Saks Fifth Avenue credit",
-        "period": "semiannual",
-        "limit": 50,
-        "used": 0
+      "benefits": [
+        {
+          "name": "Resy dining credit",
+          "period": "quarter",
+          "limit": 100,
+          "used": 0
+        },
+        {
+          "name": "Saks Fifth Avenue credit",
+          "period": "semiannual",
+          "limit": 50,
+          "used": 0
+        },
+        {
+          "name": "Uber credit",
+          "period": "monthly",
+          "limit": 50,
+          "used": 0
+        },
+        {
+          "name": "Airline fee credit",
+          "period": "annual",
+          "limit": 200,
+          "used": 0
+        }
+      ]
+    },
+    "Gold Card": {
+      "annualFee": 250,
+      "cashback": {
+        "travel": 3,
+        "dining": 4,
+        "shopping": 1,
+        "gas": 1,
+        "groceries": 4,
+        "other": 1
       },
-      {
-        "name": "Uber credit",
-        "period": "monthly",
-        "limit": 50,
-        "used": 0
+      "benefits": [
+        {
+          "name": "Uber Eats credit",
+          "period": "monthly",
+          "limit": 30,
+          "used": 0
+        },
+        {
+          "name": "Grubhub+ credit",
+          "period": "quarter",
+          "limit": 30,
+          "used": 0
+        }
+      ]
+    },
+    "Blue Cash Preferred": {
+      "annualFee": 95,
+      "cashback": {
+        "travel": 1,
+        "dining": 1,
+        "shopping": 1,
+        "gas": 3,
+        "groceries": 6,
+        "other": 1
       },
-      {
-        "name": "Airline fee credit",
-        "period": "annual",
-        "limit": 200,
-        "used": 0
-      }
-    ],
-    "Gold Card": [
-      {
-        "name": "Uber Eats credit",
-        "period": "monthly",
-        "limit": 30,
-        "used": 0
+      "benefits": []
+    },
+    "Blue Cash Everyday": {
+      "annualFee": 0,
+      "cashback": {
+        "travel": 1,
+        "dining": 1,
+        "shopping": 1,
+        "gas": 2,
+        "groceries": 3,
+        "other": 1
       },
-      {
-        "name": "Grubhub+ credit",
-        "period": "quarter",
-        "limit": 30,
-        "used": 0
-      }
-    ],
-    "Blue Cash Preferred": [],
-    "Blue Cash Everyday": [],
-    "Everyday Card": []
+      "benefits": []
+    },
+    "Everyday Card": {
+      "annualFee": 0,
+      "cashback": {
+        "travel": 1,
+        "dining": 1,
+        "shopping": 2,
+        "gas": 1,
+        "groceries": 2,
+        "other": 1
+      },
+      "benefits": []
+    }
   },
   "chase": {
-    "Sapphire Reserve": [
-      {
-        "name": "DoorDash credit",
-        "period": "quarter",
-        "limit": 60,
-        "used": 0
+    "Sapphire Reserve": {
+      "annualFee": 550,
+      "cashback": {
+        "travel": 3,
+        "dining": 3,
+        "shopping": 1,
+        "gas": 1,
+        "groceries": 1,
+        "other": 1
       },
-      {
-        "name": "Lyft credit",
-        "period": "quarter",
-        "limit": 60,
-        "used": 0
-      }
-    ],
-    "Sapphire Preferred": [
-      {
-        "name": "DoorDash credit",
-        "period": "quarter",
-        "limit": 25,
-        "used": 0
-      }
-    ],
-    "Chase Freedom Flex": [],
-    "Chase Freedom Unlimited": [],
-    "Chase Ink Business Cash": []
+      "benefits": [
+        {
+          "name": "DoorDash credit",
+          "period": "quarter",
+          "limit": 60,
+          "used": 0
+        },
+        {
+          "name": "Lyft credit",
+          "period": "quarter",
+          "limit": 60,
+          "used": 0
+        }
+      ]
+    },
+    "Sapphire Preferred": {
+      "annualFee": 95,
+      "cashback": {
+        "travel": 2,
+        "dining": 2,
+        "shopping": 1,
+        "gas": 1,
+        "groceries": 1,
+        "other": 1
+      },
+      "benefits": [
+        {
+          "name": "DoorDash credit",
+          "period": "quarter",
+          "limit": 25,
+          "used": 0
+        }
+      ]
+    },
+    "Chase Freedom Flex": {
+      "annualFee": 0,
+      "cashback": {
+        "travel": 1,
+        "dining": 3,
+        "shopping": 5,
+        "gas": 5,
+        "groceries": 5,
+        "other": 1
+      },
+      "benefits": []
+    },
+    "Chase Freedom Unlimited": {
+      "annualFee": 0,
+      "cashback": {
+        "travel": 1.5,
+        "dining": 3,
+        "shopping": 1.5,
+        "gas": 1.5,
+        "groceries": 1.5,
+        "other": 1.5
+      },
+      "benefits": []
+    },
+    "Chase Ink Business Cash": {
+      "annualFee": 0,
+      "cashback": {
+        "travel": 1,
+        "dining": 1,
+        "shopping": 5,
+        "gas": 2,
+        "groceries": 1,
+        "other": 1
+      },
+      "benefits": []
+    }
   },
   "citi": {
-    "Citi Custom Cash": [],
-    "Citi Double Cash": [],
-    "Citi Premier": []
+    "Citi Custom Cash": {
+      "annualFee": 0,
+      "cashback": {
+        "travel": 1,
+        "dining": 5,
+        "shopping": 5,
+        "gas": 5,
+        "groceries": 5,
+        "other": 1
+      },
+      "benefits": []
+    },
+    "Citi Double Cash": {
+      "annualFee": 0,
+      "cashback": {
+        "travel": 2,
+        "dining": 2,
+        "shopping": 2,
+        "gas": 2,
+        "groceries": 2,
+        "other": 2
+      },
+      "benefits": []
+    },
+    "Citi Premier": {
+      "annualFee": 95,
+      "cashback": {
+        "travel": 3,
+        "dining": 3,
+        "shopping": 1,
+        "gas": 3,
+        "groceries": 3,
+        "other": 1
+      },
+      "benefits": []
+    }
   },
   "boa": {
-    "Bank of America Customized Cash": [],
-    "Bank of America Travel Rewards": []
+    "Bank of America Customized Cash": {
+      "annualFee": 0,
+      "cashback": {
+        "travel": 1,
+        "dining": 3,
+        "shopping": 3,
+        "gas": 3,
+        "groceries": 3,
+        "other": 1
+      },
+      "benefits": []
+    },
+    "Bank of America Travel Rewards": {
+      "annualFee": 0,
+      "cashback": {
+        "travel": 1.5,
+        "dining": 1.5,
+        "shopping": 1.5,
+        "gas": 1.5,
+        "groceries": 1.5,
+        "other": 1.5
+      },
+      "benefits": []
+    }
   },
   "discover": {
-    "Discover it Cash Back": [],
-    "Discover it Miles": []
+    "Discover it Cash Back": {
+      "annualFee": 0,
+      "cashback": {
+        "travel": 1,
+        "dining": 1,
+        "shopping": 5,
+        "gas": 5,
+        "groceries": 5,
+        "other": 1
+      },
+      "benefits": []
+    },
+    "Discover it Miles": {
+      "annualFee": 0,
+      "cashback": {
+        "travel": 1.5,
+        "dining": 1.5,
+        "shopping": 1.5,
+        "gas": 1.5,
+        "groceries": 1.5,
+        "other": 1.5
+      },
+      "benefits": []
+    }
   },
   "other": {
-    "Generic Credit Card": [],
-    "Generic Debit Card": []
+    "Generic Credit Card": {
+      "annualFee": 0,
+      "cashback": {
+        "travel": 1,
+        "dining": 1,
+        "shopping": 1,
+        "gas": 1,
+        "groceries": 1,
+        "other": 1
+      },
+      "benefits": []
+    },
+    "Generic Debit Card": {
+      "annualFee": 0,
+      "cashback": {
+        "travel": 0,
+        "dining": 0,
+        "shopping": 0,
+        "gas": 0,
+        "groceries": 0,
+        "other": 0
+      },
+      "benefits": []
+    }
   }
 }
