@@ -1,92 +1,68 @@
-<!-- <!DOCTYPE html>
-
-<html>
-
-<head>
-  <title>SmartSaver2.0</title>
-  <link rel="stylesheet" href="popup.css">
-</head>
-
-<body>
-  <h1>SmartSaver</h1>
-  <br>
-  <div>
-    <button id="amex-button" class="button-43 action_btn" role="button">Click to add AMEX offers</button>
-    <br>
-    <button id="chase-button" class="button-43 action_btn" role="button">Click to add Chase offers</button>
-  </div>
-  <br>
-  <h2>Instructions:</h2>
-  <ol>
-    <li>Sign into your Amex or Chase account</li>
-    <li>Click on the credit/debit card you would like to target</li>
-    <li>Click on see all offers for that card</li>
-    <li>Click the button above once you are on the page with all of the offers you can add</li>
-    <li>It will automatically add all of the offers to your card!</li>
-  </ol>
-
-  </div>
-  <script src="popup.js"></script>
-</body>
-
-</html> -->
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SmartSaver</title>
-  <link rel="stylesheet" href="popup.css">
+  <meta charset="UTF-8" />
+  <title>perq</title>
+  <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
-  <!-- Header -->
+
+  <!-- ── Header ──────────────────────────────────────────── -->
   <header class="popup-header">
+    <div class="popup-header-logo">
+      <!-- Perq icon mark (inline SVG, no external deps) -->
+      <svg width="20" height="20" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="10" width="28" height="5" rx="2.5" fill="rgba(255,255,255,0.3)"/>
+        <rect x="4" y="18" width="20" height="5" rx="2.5" fill="rgba(255,255,255,0.18)"/>
+        <rect x="4" y="32" width="42" height="16" rx="5" fill="rgba(255,255,255,0.13)"/>
+        <rect x="8" y="37" width="17" height="3" rx="1.5" fill="rgba(255,255,255,0.6)"/>
+        <circle cx="40" cy="40" r="5" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
+        <path d="M38 40 L39.5 41.6 L42.4 38.6" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="41" cy="19" r="7" fill="rgba(6,182,212,0.35)"/>
+        <path d="M41 14 L42.5 17.3 L46 17.7 L43.5 20.2 L44 23.8 L41 22 L38 23.8 L38.5 20.2 L36 17.7 L39.5 17.3 Z" fill="rgba(255,255,255,0.95)"/>
+      </svg>
+    </div>
     <div class="popup-header-main">
-      <h1 class="popup-title">SmartSaver</h1>
-      <span class="popup-subtitle">Manage offers & cards in one place</span>
+      <h1 class="popup-title">perq</h1>
+      <span class="popup-subtitle">Your perks, tracked</span>
     </div>
   </header>
 
-  <!-- Tab Navigation -->
+  <!-- ── Tab Navigation ──────────────────────────────────── -->
   <nav class="tab-nav">
-    <button id="offers-tab" class="tab-button active">Offers</button>
-    <button id="wallet-tab" class="tab-button">Wallet</button>
+    <button id="offers-tab"  class="tab-button active">Offers</button>
+    <button id="wallet-tab"  class="tab-button">Wallet</button>
   </nav>
 
   <div class="popup-content">
-    <!-- OFFERS TAB -->
+
+    <!-- ── OFFERS TAB ──────────────────────────────────────── -->
     <div id="offers-content" class="tab-content active">
       <section class="section">
         <h2 class="section-title">Auto-add offers</h2>
-        <button id="amex-button" class="button-43 action_btn" role="button">
-          Add AMEX offers
-        </button>
-        <button id="chase-button" class="button-43 action_btn" role="button">
-          Add Chase offers
-        </button>
-
-        <h3 class="section-subtitle">How it works</h3>
+        <button id="amex-button"  class="button-43">Add Amex offers</button>
+        <button id="chase-button" class="button-43" style="margin-bottom:0;">Add Chase offers</button>
+        <p class="section-subtitle" style="margin-top:10px;">How it works</p>
         <ol class="instructions">
           <li>Sign into your Amex or Chase account</li>
-          <li>Click on the credit/debit card you would like to target</li>
-          <li>Go to the page with all offers for that card</li>
+          <li>Click the card you want to target</li>
+          <li>Navigate to the page showing all available offers</li>
           <li>Click one of the buttons above</li>
-          <li>All available offers will be added automatically</li>
+          <li>All offers are added automatically</li>
         </ol>
       </section>
     </div>
 
-    <!-- WALLET TAB -->
+    <!-- ── WALLET TAB ───────────────────────────────────────── -->
     <div id="wallet-content" class="tab-content">
-      <!-- MAIN WALLET VIEW -->
+
+      <!-- Main wallet view -->
       <div id="wallet-main-view">
         <section class="section wallet-section">
-          <h2 class="section-title">Your Wallet</h2>
+          <h2 class="section-title">Your wallet</h2>
 
           <!-- Add card form -->
           <div class="wallet-form">
-            <!-- Bank dropdown -->
             <select id="card-bank-select">
               <option value="">Select bank</option>
               <option value="amex">American Express</option>
@@ -97,61 +73,59 @@
               <option value="other">Other</option>
             </select>
 
-            <!-- Card name dropdown (depends on bank) -->
             <select id="card-name-select" disabled>
               <option value="">Select a bank first</option>
             </select>
 
-            <!-- Keep last4 and type as before -->
-            <input id="card-last4-input" type="text" maxlength="4" placeholder="Last 4" />
+            <input id="card-last4-input" type="text" maxlength="4" placeholder="Last 4 digits" />
+
             <select id="card-type-input">
               <option value="credit">Credit</option>
               <option value="debit">Debit</option>
             </select>
 
-            <button id="add-card-button" class="button-small">Add card</button>
+            <button id="add-card-button" class="button-small" style="grid-column:span 2;">
+              + Add card
+            </button>
           </div>
 
+          <!-- Stack + preview -->
           <div class="wallet-layout">
-            <!-- Stacked card names -->
-            <div id="card-stack" class="card-stack">
-              <!-- Cards injected by wallet.js -->
-            </div>
-
-            <!-- Hover preview -->
+            <div id="card-stack" class="card-stack"></div>
             <div id="card-preview" class="card-preview card-preview-empty">
-              <div class="card-preview-placeholder">
-                Hover over a card to preview it
-              </div>
+              <div class="card-preview-placeholder">Hover a card to preview</div>
             </div>
           </div>
         </section>
       </div>
 
-      <!-- CARD DETAILS VIEW (shown when a card is clicked) -->
+      <!-- Card details view -->
       <div id="wallet-details-view" class="wallet-details hidden">
         <section class="section">
           <div class="details-header-row">
             <div>
-              <h2 id="card-title" class="details-card-title">Card Details</h2>
+              <h2 id="card-title" class="details-card-title">Card details</h2>
               <div id="card-subtitle" class="details-card-subtitle"></div>
             </div>
-            <div>
-              <button id="delete-card" class="button-small button-danger" style="margin-right: 6px;">Delete card</button>
-              <button id="back-to-wallet" class="button-small button-back">Back to wallet</button>
+            <div style="display:flex;gap:6px;flex-shrink:0;">
+              <button id="delete-card"    class="button-small button-danger">Delete</button>
+              <button id="back-to-wallet" class="button-small button-back">← Back</button>
             </div>
           </div>
 
-          <div id="details-card-visual" style="margin-bottom: 8px;"></div>
+          <!-- Card visual rendered by wallet.js -->
+          <div id="details-card-visual" style="margin-bottom:10px;"></div>
 
           <h3 class="section-title">Benefits</h3>
-          <p class="section-subtitle">Track your credit usage this period.</p>
+          <p class="section-subtitle">Track your credits this period.</p>
           <div id="benefits-list" class="benefits-list"></div>
 
+          <!-- Add benefit form -->
           <div class="benefit-form">
-            <div class="section-title">Add / update benefit</div>
+            <div class="section-title">Add benefit</div>
             <div class="benefit-form-row">
-              <input id="benefit-name-input" type="text" placeholder="Benefit name (e.g. Resy dining, Saks credit)" />
+              <input id="benefit-name-input" type="text"
+                placeholder="e.g. Resy dining credit" />
             </div>
             <div class="benefit-form-row">
               <select id="benefit-period-input">
@@ -161,15 +135,18 @@
                 <option value="annual">Annual</option>
                 <option value="other">Other</option>
               </select>
-              <input id="benefit-limit-input" type="number" min="0" step="1" placeholder="Total $ per period" />
-              <input id="benefit-used-input" type="number" min="0" step="1" placeholder="Used so far $" />
+              <input id="benefit-limit-input" type="number" min="0" step="1"
+                placeholder="Total $" />
+              <input id="benefit-used-input" type="number" min="0" step="1"
+                placeholder="Used $" />
             </div>
             <button id="add-benefit-button" class="button-small">Save benefit</button>
           </div>
         </section>
       </div>
-    </div>
-  </div>
+
+    </div><!-- /wallet-content -->
+  </div><!-- /popup-content -->
 
   <script src="popup.js"></script>
   <script src="wallet.js"></script>

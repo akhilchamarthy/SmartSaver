@@ -1,11 +1,11 @@
 // content_script_checkout.js - Detects checkout pages and recommends best cards
 
-var STORAGE_KEY = 'smartsaver_cards';
+var STORAGE_KEY = 'perq_cards';
 let userCards = [];
 let isCheckoutPage = false;
 let recommendationShown = false;
 
-console.log('[SmartSaver] Checkout detector loaded on', window.location.href);
+console.log('[perq] Checkout detector loaded on', window.location.href);
 
 // Website category mapping
 const WEBSITE_CATEGORIES = {
@@ -91,7 +91,7 @@ function detectCheckoutPage() {
   // Check for payment input fields
   for (const selector of paymentSelectors) {
     if (document.querySelector(selector)) {
-      console.log('[SmartSaver] Checkout detected via selector', selector);
+      console.log('[perq] Checkout detected via selector', selector);
       return true;
     }
   }
@@ -100,7 +100,7 @@ function detectCheckoutPage() {
   const pageText = document.body.innerText.toLowerCase();
   for (const keyword of checkoutKeywords) {
     if (pageText.includes(keyword)) {
-      console.log('[SmartSaver] Checkout detected via keyword', keyword);
+      console.log('[perq] Checkout detected via keyword', keyword);
       return true;
     }
   }
@@ -110,12 +110,12 @@ function detectCheckoutPage() {
   const urlKeywords = ['checkout', 'payment', 'billing', 'cart', 'order'];
   for (const keyword of urlKeywords) {
     if (url.includes(keyword)) {
-      console.log('[SmartSaver] Checkout detected via URL keyword', keyword);
+      console.log('[perq] Checkout detected via URL keyword', keyword);
       return true;
     }
   }
 
-  console.log('[SmartSaver] Checkout NOT detected on', window.location.href);
+  console.log('[perq] Checkout NOT detected on', window.location.href);
   return false;
 }
 
@@ -153,25 +153,26 @@ function getBestCardForCategory(category) {
 
 function createRecommendationPopup(recommendedCard, category) {
   // Remove existing popup if any
-  const existingPopup = document.getElementById('smartsaver-recommendation');
+  const existingPopup = document.getElementById('perq-recommendation');
   if (existingPopup) {
     existingPopup.remove();
   }
 
   const popup = document.createElement('div');
-  popup.id = 'smartsaver-recommendation';
+  popup.id = 'perq-recommendation';
   popup.style.cssText = `
     position: fixed;
     top: 20px;
     right: 20px;
     width: 320px;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    color: white;
+    background: #0D0C20;
+    border: 1px solid rgba(124, 58, 237, 0.35);
+    color: #E0E7FF;
     padding: 16px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-radius: 14px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
     z-index: 10000;
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-size: 14px;
     line-height: 1.4;
     animation: slideIn 0.3s ease-out;
@@ -192,28 +193,28 @@ function createRecommendationPopup(recommendedCard, category) {
         <div style="width: 24px; height: 24px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
           💳
         </div>
-        <div style="font-weight: 600; font-size: 16px;">SmartSaver</div>
+        <div style="font-weight: 600; font-size: 16px;">perq</div>
       </div>
-      <button id="close-recommendation" style="background: none; border: none; color: white; font-size: 18px; cursor: pointer; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">×</button>
+      <button id="close-recommendation" style="background: none; border: none; color: #6B6B8E; font-size: 18px; cursor: pointer; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">×</button>
     </div>
     
     <div style="margin-bottom: 8px;">
-      <div style="font-weight: 600; margin-bottom: 4px;">💡 Your Best Card for ${categoryName}</div>
-      <div style="background: rgba(255, 255, 255, 0.1); padding: 8px; border-radius: 6px;">
-        <div style="font-weight: 600; font-size: 15px;">${recommendedCard.name}</div>
-        <div style="font-size: 12px; opacity: 0.9;">${recommendedCard.bank} * ${cashbackRate}% cashback</div>
+      <div style="font-weight: 600; margin-bottom: 4px; color: #A78BFA;">Best card for ${categoryName}</div>
+      <div style="background: rgba(124, 58, 237, 0.15); border: 1px solid rgba(124, 58, 237, 0.25); padding: 8px; border-radius: 6px;">
+        <div style="font-weight: 600; font-size: 14px; color: #E0E7FF;">${recommendedCard.name}</div>
+        <div style="font-size: 11px; color: #22D3EE; margin-top: 2px;">${recommendedCard.bank} · ${cashbackRate}% cashback</div>
       </div>
     </div>
     
-    <div style="font-size: 12px; opacity: 0.8; margin-bottom: 12px;">
+    <div style="font-size: 11px; color: #6B6B8E; margin-bottom: 12px;">
       You're shopping on ${getCurrentDomain()} - this card gives you the highest cashback rate for ${categoryName.toLowerCase()} purchases.
     </div>
     
     <div style="display: flex; gap: 8px;">
-      <button id="open-wallet" style="flex: 1; background: white; color: #2563eb; border: none; padding: 8px 12px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 12px;">
+      <button id="open-wallet" style="flex: 1; background: linear-gradient(135deg, #7C3AED, #06B6D4); color: white; border: none; padding: 8px 12px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 12px;">
         View Wallet
       </button>
-      <button id="dismiss-recommendation" style="flex: 1; background: rgba(255, 255, 255, 0.2); color: white; border: none; padding: 8px 12px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 12px;">
+      <button id="dismiss-recommendation" style="flex: 1; background: rgba(255,255,255,0.06); color: #6B6B8E; border: none; padding: 8px 12px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 12px;">
         Dismiss
       </button>
     </div>
@@ -237,7 +238,7 @@ function createRecommendationPopup(recommendedCard, category) {
 
   // Auto-dismiss after 10 seconds
   // setTimeout(() => {
-  //   if (document.getElementById('smartsaver-recommendation')) {
+  //   if (document.getElementById('perq-recommendation')) {
   //     popup.remove();
   //   }
   // }, 10000);
@@ -246,7 +247,7 @@ function createRecommendationPopup(recommendedCard, category) {
 function loadUserCards() {
   chrome.storage.local.get([STORAGE_KEY], (result) => {
     userCards = result[STORAGE_KEY] || [];
-    console.log('[SmartSaver] Loaded user cards:', userCards.length, userCards);
+    console.log('[perq] Loaded user cards:', userCards.length, userCards);
     checkAndShowRecommendation();
   });
 }
@@ -257,7 +258,7 @@ function checkAndShowRecommendation() {
   }
 
   if (!userCards.length) {
-    console.log('[SmartSaver] No user cards found in storage; skipping recommendation');
+    console.log('[perq] No user cards found in storage; skipping recommendation');
     return;
   }
 
@@ -267,15 +268,15 @@ function checkAndShowRecommendation() {
   }
 
   const category = getWebsiteCategory();
-  console.log('[SmartSaver] Website category resolved to', category, 'for domain', getCurrentDomain());
+  console.log('[perq] Website category resolved to', category, 'for domain', getCurrentDomain());
   const bestCard = getBestCardForCategory(category);
 
   if (bestCard) {
-    console.log('[SmartSaver] Best card found for category', category, bestCard);
+    console.log('[perq] Best card found for category', category, bestCard);
     recommendationShown = true;
     createRecommendationPopup(bestCard, category);
   } else {
-    console.log('[SmartSaver] No suitable card found for category', category);
+    console.log('[perq] No suitable card found for category', category);
   }
 }
 

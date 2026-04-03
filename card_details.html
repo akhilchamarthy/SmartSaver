@@ -2,128 +2,131 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>Card Details - SmartSaver</title>
-  <link rel="stylesheet" href="popup.css"/>
+  <title>Card Details — perq</title>
+  <link rel="stylesheet" href="popup.css" />
   <style>
-    body {
-      width: 480px;
-      max-width: 100vw;
-    }
-    .details-page {
-      padding: 12px 14px 16px;
-    }
-    .details-header-row {
+    body { width: 480px; max-width: 100vw; }
+
+    .details-page { padding: 12px 14px 20px; }
+
+    .back-row {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      gap: 8px;
+      margin-bottom: 14px;
     }
+
     .details-card-title {
       font-size: 16px;
-      font-weight: 600;
-      margin: 0;
+      font-weight: 700;
+      color: #E0E7FF;
+      letter-spacing: -0.3px;
     }
+
     .details-card-subtitle {
       font-size: 12px;
-      color: #4b5563;
+      color: #6B6B8E;
+      margin-top: 2px;
     }
-    .benefits-list {
-      margin-top: 8px;
+
+    /* Wider benefits list for standalone page */
+    .benefits-list { max-height: none; }
+
+    /* Add-benefit form on standalone page */
+    .benefit-form-standalone {
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: #06040F;
+      border: 1px solid rgba(124, 58, 237, 0.16);
+      border-radius: 12px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
     }
-    .benefit-item {
-      background: white;
-      border-radius: 8px;
-      padding: 8px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+
+    .benefit-form-standalone .section-title {
+      font-size: 13px;
+      color: #A78BFA;
+      margin-bottom: 0;
+    }
+
+    .benefit-form-standalone input,
+    .benefit-form-standalone select {
+      background: #12112A;
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 7px;
+      color: #E0E7FF;
+      font-family: inherit;
       font-size: 12px;
+      padding: 6px 9px;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.15s;
+    }
+
+    .benefit-form-standalone input::placeholder { color: #4A4A6A; }
+
+    .benefit-form-standalone input:focus,
+    .benefit-form-standalone select:focus {
+      border-color: rgba(124,58,237,0.55);
+    }
+
+    .benefit-form-standalone select option { background: #12112A; color: #E0E7FF; }
+
+    .form-row {
       display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    .benefit-name-row {
-      display: flex;
-      justify-content: space-between;
-      font-weight: 600;
-      color: #111827;
-    }
-    .benefit-meta {
-      font-size: 11px;
-      color: #6b7280;
-    }
-    .benefit-progress {
-      margin-top: 4px;
-      font-size: 11px;
-    }
-    .benefit-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 4px;
-      gap: 4px;
-    }
-    .benefit-actions input[type="number"] {
-      width: 90px;
-      font-size: 11px;
-      padding: 2px 4px;
-    }
-    .benefit-form {
-      margin-top: 10px;
-      padding: 8px;
-      background: #f9fafb;
-      border-radius: 8px;
-      border: 1px solid #e5e7eb;
-      font-size: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .benefit-form-row {
-      display: flex;
-      gap: 6px;
-    }
-    .benefit-form input,
-    .benefit-form select {
-      flex: 1;
-      font-size: 11px;
-      padding: 4px 6px;
-      border-radius: 4px;
-      border: 1px solid #d1d5db;
-      box-sizing: border-box;
+      gap: 8px;
     }
   </style>
 </head>
 <body>
+
+  <!-- ── Header ──────────────────────────────────────────── -->
   <header class="popup-header">
+    <div class="popup-header-logo">
+      <svg width="20" height="20" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="10" width="28" height="5" rx="2.5" fill="rgba(255,255,255,0.3)"/>
+        <rect x="4" y="18" width="20" height="5" rx="2.5" fill="rgba(255,255,255,0.18)"/>
+        <rect x="4" y="32" width="42" height="16" rx="5" fill="rgba(255,255,255,0.13)"/>
+        <rect x="8" y="37" width="17" height="3" rx="1.5" fill="rgba(255,255,255,0.6)"/>
+        <circle cx="40" cy="40" r="5" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="1.5"/>
+        <path d="M38 40 L39.5 41.6 L42.4 38.6" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="41" cy="19" r="7" fill="rgba(6,182,212,0.35)"/>
+        <path d="M41 14 L42.5 17.3 L46 17.7 L43.5 20.2 L44 23.8 L41 22 L38 23.8 L38.5 20.2 L36 17.7 L39.5 17.3 Z" fill="rgba(255,255,255,0.95)"/>
+      </svg>
+    </div>
     <div class="popup-header-main">
-      <h1 class="popup-title">Card Details</h1>
-      <span class="popup-subtitle">Track your benefits usage</span>
+      <h1 class="popup-title">perq</h1>
+      <span class="popup-subtitle">Card details</span>
     </div>
   </header>
 
   <main class="details-page">
-    <div class="details-header-row">
+
+    <!-- Back + card identity -->
+    <div class="back-row">
+      <button id="back-to-main" class="button-small button-back">← Back</button>
       <div>
-        <h2 id="card-title" class="details-card-title">Loading...</h2>
+        <h2 id="card-title" class="details-card-title">Loading…</h2>
         <div id="card-subtitle" class="details-card-subtitle"></div>
       </div>
-      <button id="back-to-main" class="button-small button-back">Back to main</button>
     </div>
 
+    <!-- Benefits section -->
     <section class="section">
       <h3 class="section-title">Benefits</h3>
-      <p class="section-subtitle">Add credits and track how much you have used this year.</p>
+      <p class="section-subtitle">Add credits and track usage for this period.</p>
       <div id="benefits-list" class="benefits-list"></div>
     </section>
 
-    <section class="section benefit-form">
+    <!-- Add benefit form -->
+    <div class="benefit-form-standalone">
       <div class="section-title">Add / update benefit</div>
-      <div class="benefit-form-row">
-        <input id="benefit-name-input" type="text" placeholder="Benefit name (e.g. Resy dining, Saks credit)" />
-      </div>
-      <div class="benefit-form-row">
+
+      <input id="benefit-name-input" type="text"
+        placeholder="Benefit name (e.g. Resy dining, Saks credit)" />
+
+      <div class="form-row">
         <select id="benefit-period-input">
           <option value="quarter">Quarterly</option>
           <option value="monthly">Monthly</option>
@@ -131,11 +134,15 @@
           <option value="annual">Annual</option>
           <option value="other">Other</option>
         </select>
-        <input id="benefit-limit-input" type="number" min="0" step="1" placeholder="Total $ per period" />
-        <input id="benefit-used-input" type="number" min="0" step="1" placeholder="Used so far $" />
+        <input id="benefit-limit-input" type="number" min="0" step="1"
+          placeholder="Total $ per period" />
+        <input id="benefit-used-input" type="number" min="0" step="1"
+          placeholder="Used so far $" />
       </div>
+
       <button id="add-benefit-button" class="button-small">Save benefit</button>
-    </section>
+    </div>
+
   </main>
 
   <script src="card_details.js"></script>
