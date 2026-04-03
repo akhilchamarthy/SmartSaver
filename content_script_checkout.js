@@ -1,6 +1,6 @@
 // content_script_checkout.js - Detects checkout pages and recommends best cards
 
-var STORAGE_KEY = 'perq_cards';
+var STORAGE_KEY = 'smartsaver_cards';
 let userCards = [];
 let isCheckoutPage = false;
 let recommendationShown = false;
@@ -65,54 +65,52 @@ function getWebsiteCategory() {
 }
 
 function detectCheckoutPage() {
-  // Look for payment-related elements
-  const paymentSelectors = [
-    'input[name*="card"]',
-    'input[id*="card"]',
-    'input[name*="credit"]',
-    'input[id*="credit"]',
-    'input[name*="payment"]',
-    'input[id*="payment"]',
-    'input[placeholder*="card"]',
-    'input[placeholder*="credit"]',
-    '.payment',
-    '.checkout',
-    '.billing',
-    '#payment',
-    '#checkout',
-    '#billing'
+  // 1. URL path must contain a checkout-specific segment (not just any substring)
+  const urlPath = window.location.pathname.toLowerCase();
+  const urlCheckoutPattern = /\/(checkout|payment|billing|pay|order-confirm|order-review|place-order)(\/|$)/;
+  const urlMatches = urlCheckoutPattern.test(urlPath);
+
+  // 2. Look for actual credit card number input fields (specific to payment forms)
+  const cardInputSelectors = [
+    'input[name="cardnumber"]',
+    'input[name="card_number"]',
+    'input[name="cc-number"]',
+    'input[id*="card-number"]',
+    'input[id*="cardnumber"]',
+    'input[id*="cc-number"]',
+    'input[autocomplete="cc-number"]',
+    'input[data-stripe="number"]',
+    'input[maxlength="16"][type="tel"]',
+    'input[maxlength="19"][type="tel"]',
+    'input[maxlength="16"][type="text"][name*="card"]',
+    // Stripe / Braintree iframes embed payment fields
+    'iframe[name*="stripe"]',
+    'iframe[id*="stripe"]',
+    'iframe[src*="stripe"]',
+    'iframe[src*="braintree"]',
+    'iframe[src*="paypal"]',
+    '[data-braintree-id]',
   ];
 
-  const checkoutKeywords = [
-    'checkout', 'payment', 'billing', 'card number', 'credit card',
-    'pay now', 'complete order', 'place order', 'review order'
-  ];
+  const hasCardInput = cardInputSelectors.some(sel => document.querySelector(sel));
 
-  // Check for payment input fields
-  for (const selector of paymentSelectors) {
-    if (document.querySelector(selector)) {
-      console.log('[perq] Checkout detected via selector', selector);
-      return true;
-    }
-  }
-
-  // Check for checkout keywords in page text
+  // 3. Require at least two specific co-occurring payment keywords (reduces false positives)
   const pageText = document.body.innerText.toLowerCase();
-  for (const keyword of checkoutKeywords) {
-    if (pageText.includes(keyword)) {
-      console.log('[perq] Checkout detected via keyword', keyword);
-      return true;
-    }
-  }
+  const specificKeywords = ['card number', 'cvv', 'cvc', 'expir', 'security code', 'billing address'];
+  const keywordMatches = specificKeywords.filter(kw => pageText.includes(kw)).length;
+  const hasPaymentForm = keywordMatches >= 2;
 
-  // Check URL for checkout indicators
-  const url = window.location.href.toLowerCase();
-  const urlKeywords = ['checkout', 'payment', 'billing', 'cart', 'order'];
-  for (const keyword of urlKeywords) {
-    if (url.includes(keyword)) {
-      console.log('[perq] Checkout detected via URL keyword', keyword);
-      return true;
-    }
+  if (urlMatches) {
+    console.log('[perq] Checkout detected via URL path', urlPath);
+    return true;
+  }
+  if (hasCardInput) {
+    console.log('[perq] Checkout detected via card input fields');
+    return true;
+  }
+  if (hasPaymentForm) {
+    console.log('[perq] Checkout detected via payment form keywords', keywordMatches);
+    return true;
   }
 
   console.log('[perq] Checkout NOT detected on', window.location.href);
@@ -284,23 +282,20 @@ function checkAndShowRecommendation() {
 function init() {
   loadUserCards();
   
-  // Check periodically for checkout page changes
-  setInterval(() => {
-    if (!recommendationShown) {
-      checkAndShowRecommendation();
-    }
-  }, 2000);
-
-  // Listen for DOM changes (for SPAs)
+  // Listen for URL changes in SPAs (history navigation)
+  let lastUrl = window.location.href;
   const observer = new MutationObserver(() => {
-    if (!recommendationShown) {
-      setTimeout(checkAndShowRecommendation, 500);
+    const currentUrl = window.location.href;
+    if (currentUrl !== lastUrl) {
+      lastUrl = currentUrl;
+      recommendationShown = false; // Reset for new page
+      setTimeout(checkAndShowRecommendation, 800);
     }
   });
 
   observer.observe(document.body, {
     childList: true,
-    subtree: true
+    subtree: false // Only top-level changes, not deep subtree
   });
 }
 
