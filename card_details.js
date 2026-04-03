@@ -1,6 +1,6 @@
 // card_details.js
 
-const STORAGE_KEY = 'smartsaver_cards';
+var STORAGE_KEY = 'smartsaver_cards';
 let cards = [];
 let currentCard = null;
 
@@ -39,7 +39,6 @@ function renderCardHeader() {
   if (currentCard.last4) parts.push(`${currentCard.last4}`);
   if (currentCard.type) parts.push(currentCard.type.toUpperCase());
 
-  // subtitleEl.textContent = parts.join(' • ');
 }
 
 function renderBenefits() {

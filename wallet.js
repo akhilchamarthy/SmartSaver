@@ -1,6 +1,6 @@
 // wallet.js
 
-const STORAGE_KEY = 'smartsaver_cards';
+var STORAGE_KEY = 'smartsaver_cards';
 
 let cards = [];
 let currentCardId = null;
@@ -57,6 +57,92 @@ function loadCards() {
     cards = result[STORAGE_KEY] || [];
     renderCardStack();
   });
+}
+
+function renderDetailsCardVisual(card) {
+  const container = document.getElementById('details-card-visual');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  const cardEl = document.createElement('div');
+  cardEl.style.borderRadius = '12px';
+  cardEl.style.padding = '12px 14px';
+  cardEl.style.color = 'white';
+  cardEl.style.display = 'flex';
+  cardEl.style.flexDirection = 'column';
+  cardEl.style.justifyContent = 'space-between';
+  cardEl.style.height = '90px';
+  cardEl.style.boxShadow = '0 4px 10px rgba(15, 23, 42, 0.3)';
+
+  const bank = (card.bank || '').toLowerCase();
+  if (bank.includes('american express')) {
+    cardEl.style.background = 'linear-gradient(135deg, #2563eb, #1d4ed8)';
+  } else if (bank.includes('chase')) {
+    cardEl.style.background = 'linear-gradient(135deg, #0f172a, #1e293b)';
+  } else if (bank.includes('citi')) {
+    cardEl.style.background = 'linear-gradient(135deg, #be123c, #db2777)';
+  } else if (bank.includes('bank of america')) {
+    cardEl.style.background = 'linear-gradient(135deg, #b91c1c, #ef4444)';
+  } else if (bank.includes('discover')) {
+    cardEl.style.background = 'linear-gradient(135deg, #ea580c, #f97316)';
+  } else {
+    cardEl.style.background = 'linear-gradient(135deg, #4b5563, #111827)';
+  }
+
+  const topRow = document.createElement('div');
+  topRow.style.display = 'flex';
+  topRow.style.justifyContent = 'space-between';
+  topRow.style.alignItems = 'center';
+
+  const bankEl = document.createElement('div');
+  bankEl.style.fontSize = '11px';
+  bankEl.style.fontWeight = '600';
+  bankEl.textContent = card.bank || 'Card';
+
+  const typeEl = document.createElement('div');
+  typeEl.style.fontSize = '11px';
+  typeEl.textContent = (card.type || 'credit').toUpperCase();
+
+  topRow.appendChild(bankEl);
+  topRow.appendChild(typeEl);
+
+  const nameEl = document.createElement('div');
+  nameEl.style.fontSize = '13px';
+  nameEl.style.fontWeight = '600';
+  nameEl.style.marginTop = '4px';
+  nameEl.textContent = card.name || 'Untitled card';
+
+  const bottomRow = document.createElement('div');
+  bottomRow.style.display = 'flex';
+  bottomRow.style.justifyContent = 'space-between';
+  bottomRow.style.marginTop = '8px';
+
+  const last4El = document.createElement('div');
+  last4El.style.fontSize = '12px';
+  last4El.textContent = card.last4 ? `**** ${card.last4}` : '';
+
+  const networkEl = document.createElement('div');
+  networkEl.style.fontSize = '11px';
+  const lowerBank = (card.bank || '').toLowerCase();
+  if (lowerBank.includes('american express')) {
+    networkEl.textContent = 'AMEX';
+  } else if (lowerBank.includes('chase')) {
+    networkEl.textContent = 'VISA';
+  } else if (lowerBank.includes('discover')) {
+    networkEl.textContent = 'DISCOVER';
+  } else {
+    networkEl.textContent = '';
+  }
+
+  bottomRow.appendChild(last4El);
+  bottomRow.appendChild(networkEl);
+
+  cardEl.appendChild(topRow);
+  cardEl.appendChild(nameEl);
+  cardEl.appendChild(bottomRow);
+
+  container.appendChild(cardEl);
 }
 
 function saveCards() {
@@ -157,6 +243,7 @@ function openDetails(cardId) {
   detailsView.classList.remove('hidden');
 
   renderCardHeader(card);
+  renderDetailsCardVisual(card);
   renderBenefits(card);
 }
 
@@ -179,9 +266,10 @@ function renderCardHeader(card) {
   if (subtitleEl) {
     const parts = [];
     if (card.bank) parts.push(card.bank);
-    if (card.last4) parts.push(`${card.last4}`);
-    if (card.type) parts.push(card.type.toUpperCase());
-    // subtitleEl.textContent = parts.join(' • ');
+    // if (card.last4) parts.push(`${card.last4}`);
+    // if (card.type) parts.push(card.type.toUpperCase());
+    if (card.annualFee !== undefined) parts.push(`$${card.annualFee} AF`);
+    subtitleEl.textContent = parts.join("\r\n");
   }
 }
 
@@ -191,9 +279,45 @@ function renderBenefits(card) {
 
   list.innerHTML = '';
 
+  // Add cashback info section
+  if (card.cashback && Object.keys(card.cashback).length > 0) {
+    const cashbackSection = document.createElement('div');
+    cashbackSection.className = 'cashback-section';
+    cashbackSection.style.marginBottom = '8px';
+    cashbackSection.style.padding = '6px 8px';
+    cashbackSection.style.background = '#e0f2fe';
+    cashbackSection.style.borderRadius = '6px';
+    cashbackSection.style.border = '1px solid #0891b2';
+    
+    const cashbackTitle = document.createElement('div');
+    cashbackTitle.style.fontWeight = '600';
+    cashbackTitle.style.fontSize = '11px';
+    cashbackTitle.style.color = '#0c4a6e';
+    cashbackTitle.style.marginBottom = '4px';
+    cashbackTitle.textContent = 'Cashback Rates';
+    
+    const cashbackGrid = document.createElement('div');
+    cashbackGrid.style.display = 'grid';
+    cashbackGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
+    cashbackGrid.style.gap = '2px';
+    cashbackGrid.style.fontSize = '10px';
+    
+    Object.entries(card.cashback).forEach(([category, rate]) => {
+      const item = document.createElement('div');
+      item.style.color = '#0c4a6e';
+      const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
+      item.textContent = `${categoryName}: ${rate}%`;
+      cashbackGrid.appendChild(item);
+    });
+    
+    cashbackSection.appendChild(cashbackTitle);
+    cashbackSection.appendChild(cashbackGrid);
+    list.appendChild(cashbackSection);
+  }
+
   if (!card.benefits || !card.benefits.length) {
     const empty = document.createElement('div');
-    empty.textContent = 'No benefits yet. Add one below or they were auto-loaded when you added this card.';
+    empty.textContent = 'No additional benefits. Add one below or they were auto-loaded when you added this card.';
     empty.style.fontSize = '10px';
     empty.style.color = '#6b7280';
     list.appendChild(empty);
@@ -283,10 +407,22 @@ function getDefaultBenefitsForCard(bankCode, cardName) {
   if (!defaultBenefits[bankCode] || !defaultBenefits[bankCode][cardName]) {
     return [];
   }
-  return defaultBenefits[bankCode][cardName].map(benefit => ({
+  const cardData = defaultBenefits[bankCode][cardName];
+  return cardData.benefits ? cardData.benefits.map(benefit => ({
     id: Date.now().toString() + Math.random(),
     ...benefit
-  }));
+  })) : [];
+}
+
+function getCardFinancialInfo(bankCode, cardName) {
+  if (!defaultBenefits[bankCode] || !defaultBenefits[bankCode][cardName]) {
+    return { annualFee: 0, cashback: {} };
+  }
+  const cardData = defaultBenefits[bankCode][cardName];
+  return {
+    annualFee: cardData.annualFee || 0,
+    cashback: cardData.cashback || {}
+  };
 }
 
 function updateCardNameOptions() {
@@ -351,6 +487,7 @@ function handleAddCard() {
 
   const bankLabel = getBankLabel(bankCode);
 
+  const financialInfo = getCardFinancialInfo(bankCode, cardName);
   const newCard = {
     id: Date.now().toString(),
     name: cardName,
@@ -358,7 +495,9 @@ function handleAddCard() {
     last4,
     type,
     notes: '',
-    benefits: getDefaultBenefitsForCard(bankCode, cardName)
+    benefits: getDefaultBenefitsForCard(bankCode, cardName),
+    annualFee: financialInfo.annualFee,
+    cashback: financialInfo.cashback
   };
 
   cards.push(newCard);
@@ -452,6 +591,7 @@ function switchTab(tabName) {
 document.addEventListener('DOMContentLoaded', () => {
   const addBtn = document.getElementById('add-card-button');
   const backBtn = document.getElementById('back-to-wallet');
+  const deleteCardBtn = document.getElementById('delete-card');
   const addBenefitBtn = document.getElementById('add-benefit-button');
   const bankSelect = document.getElementById('card-bank-select');
   const offersTab = document.getElementById('offers-tab');
@@ -459,6 +599,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (addBtn) addBtn.addEventListener('click', handleAddCard);
   if (backBtn) backBtn.addEventListener('click', closeDetails);
+  if (deleteCardBtn) deleteCardBtn.addEventListener('click', handleDeleteCard);
   if (addBenefitBtn) addBenefitBtn.addEventListener('click', handleAddBenefit);
   if (bankSelect) bankSelect.addEventListener('change', updateCardNameOptions);
   if (offersTab) offersTab.addEventListener('click', () => switchTab('offers'));
